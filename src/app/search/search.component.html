@@ -1,0 +1,44 @@
+<div class="search-container">
+    <input [(ngModel)]="userInput" (input)="doFilterChain()" placeholder="Pretraži po nazivu ili ID-u" />
+    
+    <select [(ngModel)]="selectedGenre" (change)="doFilterChain()">
+      <option value="">Svi žanrovi</option>
+      <option *ngFor="let genre of genreList" [value]="genre">{{ genre }}</option>
+    </select>
+  
+    <select [(ngModel)]="selectedDirector" (change)="doFilterChain()">
+      <option value="">Svi reditelji</option>
+      <option *ngFor="let director of directorList" [value]="director">{{ director }}</option>
+    </select>
+  
+    <select [(ngModel)]="selectedDate" (change)="doFilterChain()">
+      <option value="">Svi datumi</option>
+      <option *ngFor="let date of dateOptions" [value]="date">{{ date }}</option>
+    </select>
+  
+    <button (click)="doReset()">Resetuj</button>
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Naziv</th>
+        <th>Žanr</th>
+        <th>Reditelj</th>
+        <th>Datum izlaska</th>
+        <th>Akcije</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of dataSource">
+        <td>{{ movie.id }}</td>
+        <td>{{ movie.title }}</td>
+        <td>{{ movie.genre }}</td>
+        <td>{{ movie.director }}</td>
+        <td>{{ movie.releaseDate | date }}</td>
+        <td><button (click)="viewDetails(movie)">Detalji</button></td>
+      </tr>
+    </tbody>
+  </table>
+  

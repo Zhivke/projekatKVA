@@ -1,7 +1,24 @@
-<nav>
-  <a routerLink="/home">Home</a> |
-  <a routerLink="/about">About</a> |
-  <a routerLink="/search">Search</a>
-</nav>
+<mat-toolbar color="primary">
+  <span><i class="fa-solid fa-film"></i> Digitalni Šalter Bioskopa</span>
+  <span class="spacer"></span>
+  <a routerLink="/" mat-button>
+      <i class="fa-solid fa-house"></i> Početna
+  </a>
+  <a routerLink="/search" mat-button>
+      <i class="fa-solid fa-search"></i> Pretraga
+  </a>
+  <a routerLink="/login" mat-button *ngIf="!authService.getActiveUser()">
+      <i class="fa-solid fa-right-to-bracket"></i> Prijava
+  </a>
+  <a routerLink="/user" mat-button *ngIf="authService.getActiveUser()">
+      <i class="fa-solid fa-user"></i> Profil
+  </a>
+  <button mat-button *ngIf="authService.getActiveUser()" (click)="doLogout()">
+      <i class="fa-solid fa-right-from-bracket"></i> Odjava
+  </button>
+  <a routerLink="/about" mat-button>
+      <i class="fa-solid fa-circle-info"></i> O nama
+  </a>
+</mat-toolbar>
 
-<router-outlet></router-outlet>
+<router-outlet />
