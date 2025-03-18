@@ -4,5 +4,6 @@ export interface MovieModel {
     genre: string;
     director: string;
     releaseDate: string;
+    poster: string;
   }
   

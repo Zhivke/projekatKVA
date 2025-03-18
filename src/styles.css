@@ -1,12 +1,12 @@
 html,
 body {
     height: 100%;
-    background-color: #1e2124;
-    color: white;
+    background-color: #3d0211;
+    color: rgb(255, 255, 255);
 }
 
 .bg-dark {
-    background-color: #1e2124;
+    background-color: #1d69b4;
     color: white;
 }
 

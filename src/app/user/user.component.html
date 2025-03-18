@@ -4,8 +4,8 @@
             <img mat-card-avatar class="example-header-image" [src]="'https://ui-avatars.com/api/?name='+user.email">
             <mat-card-title>{{user.firstName}} {{user.lastName}}</mat-card-title>
             <mat-card-subtitle>
-                <p class="no-border">Total Reservations: {{user.reservations.length}}</p>
-                <p class="no-border">Favorite Movie: {{user.favoriteMovie}}</p>
+                <p class="no-border">Total Reservations: {{user.orders.length}}</p>
+                <p class="no-border">Favorite Movie: {{user.favoriteGenre}}</p>
             </mat-card-subtitle>
         </mat-card-header>
         <mat-card-content class="user-card-content">
@@ -36,9 +36,9 @@
         </mat-card-content>
     </mat-card>
 
-    <div *ngIf="user.reservations.length > 0">
+    <div *ngIf="user.orders.length > 0">
         <h1>Reservation List</h1>
-        <table mat-table [dataSource]="user.reservations" class="mat-elevation-z8">
+        <table mat-table [dataSource]="user.orders" class="mat-elevation-z8">
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>#</th>
                 <td mat-cell *matCellDef="let element">{{element.id}}</td>
@@ -72,15 +72,6 @@
             <ng-container matColumnDef="status">
                 <th mat-header-cell *matHeaderCellDef>Status</th>
                 <td mat-cell *matCellDef="let element">{{element.status}}</td>
-            </ng-container>
-
-            <ng-container matColumnDef="actions">
-                <th mat-header-cell *matHeaderCellDef>Actions</th>
-                <td mat-cell *matCellDef="let element">
-                    <button mat-button *ngIf="element.status === 'reserved'" (click)="doCancel(element)">
-                        <i class="fa-solid fa-ban"></i> Cancel
-                    </button>
-                </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,24 +1,37 @@
 <mat-toolbar color="primary">
-  <span><i class="fa-solid fa-film"></i> Digitalni Šalter Bioskopa</span>
-  <span class="spacer"></span>
-  <a routerLink="/" mat-button>
-      <i class="fa-solid fa-house"></i> Početna
-  </a>
-  <a routerLink="/search" mat-button>
-      <i class="fa-solid fa-search"></i> Pretraga
-  </a>
-  <a routerLink="/login" mat-button *ngIf="!authService.getActiveUser()">
-      <i class="fa-solid fa-right-to-bracket"></i> Prijava
-  </a>
-  <a routerLink="/user" mat-button *ngIf="authService.getActiveUser()">
-      <i class="fa-solid fa-user"></i> Profil
-  </a>
-  <button mat-button *ngIf="authService.getActiveUser()" (click)="doLogout()">
-      <i class="fa-solid fa-right-from-bracket"></i> Odjava
-  </button>
-  <a routerLink="/about" mat-button>
-      <i class="fa-solid fa-circle-info"></i> O nama
-  </a>
-</mat-toolbar>
-
-<router-outlet />
+    <span><i class="fa-solid fa-film"></i> BioScope </span>
+    <span class="spacer"></span>
+    
+    <a routerLink="/home" mat-button>
+      <i class="fa-solid fa-house"></i>
+      <span class="link-name">Početna</span>
+    </a>
+    
+    <a routerLink="/search" mat-button>
+      <i class="fa-solid fa-search"></i>
+      <span class="link-name">Pretraga</span>
+    </a>
+    
+    <a routerLink="/login" mat-button *ngIf="!service.getActiveUser()">
+      <i class="fa-solid fa-right-to-bracket"></i>
+      <span class="link-name">Prijava</span>
+    </a>
+    
+    <a routerLink="/user" mat-button *ngIf="service.getActiveUser()">
+      <i class="fa-solid fa-user"></i>
+      <span class="link-name">Profil</span>
+    </a>
+  
+    <button mat-button *ngIf="service.getActiveUser()" (click)="doLogout()">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      <span class="link-name">Odjava</span>
+    </button>
+  
+    <a routerLink="/about" mat-button class="about-btn">
+      <i class="fa-solid fa-circle-info"></i>
+      <span class="link-name">O nama</span>
+    </a>
+  </mat-toolbar>
+  
+  <router-outlet />
+  

@@ -5,13 +5,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { AxiosError } from 'axios';
+import { LoadingComponent } from '../loading/loading.component';
 
 
 
 @Component({
   selector: 'app-home',
-  standalone: true,
-  imports: [JsonPipe, CommonModule, NgIf, NgFor, MatCardModule, MatButtonModule, RouterModule],
+  imports: [CommonModule, NgIf, NgFor, MatCardModule, MatButtonModule, RouterModule, JsonPipe, LoadingComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

@@ -8,15 +8,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MovieModel } from '../../models/movie.model';
-import { movieService } from '../../services/movie.service';
+import { movieService } from '../../services/movie.service'; // Pazimo na ispravan import
 
 @Component({
   selector: 'app-movie-search',
   standalone: true,
   imports: [
-    CommonModule,  // 👈 Dodaj ovo za *ngFor i | date
-    FormsModule,   // 👈 Dodaj ovo za [(ngModel)]
-    NgIf, 
+    CommonModule,  
+    FormsModule,   
     NgFor, 
     MatTableModule,
     MatButtonModule,
@@ -26,7 +25,7 @@ import { movieService } from '../../services/movie.service';
     MatSelectModule
   ],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  styleUrls: ['./search.component.css'] // OVO JE BILO GREŠKA, treba da bude 'styleUrls'
 })
 export class MovieSearchComponent {
   displayedColumns: string[] = ['id', 'title', 'genre', 'director', 'releaseDate', 'actions'];
@@ -41,7 +40,7 @@ export class MovieSearchComponent {
   selectedDate: string | null = null;
 
   constructor() {
-    movieService.getMovie() // SADA POZIVAMO STATIC METODU
+    movieService.getMovie() // SADA ISPRAVNO POZIVAMO STATIC METODU
       .then((rsp: { data: MovieModel[] }) => {
         this.allData = rsp.data;
         this.dataSource = rsp.data;
@@ -87,7 +86,7 @@ export class MovieSearchComponent {
 
     this.generateSearchCriteria(this.dataSource);
   }
-
+  
   public viewDetails(movie: MovieModel) {
     console.log('Viewing details for:', movie);
   }

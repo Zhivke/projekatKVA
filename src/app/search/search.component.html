@@ -1,44 +1,78 @@
-<div class="search-container">
-    <input [(ngModel)]="userInput" (input)="doFilterChain()" placeholder="Pretraži po nazivu ili ID-u" />
-    
-    <select [(ngModel)]="selectedGenre" (change)="doFilterChain()">
-      <option value="">Svi žanrovi</option>
-      <option *ngFor="let genre of genreList" [value]="genre">{{ genre }}</option>
-    </select>
+<div class="wrapper" *ngIf="dataSource">
+  <h1>Pretraga Filmova</h1>
   
-    <select [(ngModel)]="selectedDirector" (change)="doFilterChain()">
-      <option value="">Svi reditelji</option>
-      <option *ngFor="let director of directorList" [value]="director">{{ director }}</option>
-    </select>
-  
-    <select [(ngModel)]="selectedDate" (change)="doFilterChain()">
-      <option value="">Svi datumi</option>
-      <option *ngFor="let date of dateOptions" [value]="date">{{ date }}</option>
-    </select>
-  
-    <button (click)="doReset()">Resetuj</button>
-  </div>
-  
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Naziv</th>
-        <th>Žanr</th>
-        <th>Reditelj</th>
-        <th>Datum izlaska</th>
-        <th>Akcije</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let movie of dataSource">
-        <td>{{ movie.id }}</td>
-        <td>{{ movie.title }}</td>
-        <td>{{ movie.genre }}</td>
-        <td>{{ movie.director }}</td>
-        <td>{{ movie.releaseDate | date }}</td>
-        <td><button (click)="viewDetails(movie)">Detalji</button></td>
-      </tr>
-    </tbody>
+  <mat-card class="search-card">
+    <mat-card-content>
+      <div class="search-input-row">
+        <mat-form-field class="search-input">
+          <mat-label>Pretraži po nazivu ili ID-u</mat-label>
+          <input matInput [(ngModel)]="userInput" (keyup)="doFilterChain()" placeholder="Unesite naziv ili ID">
+        </mat-form-field>
+
+        <mat-form-field class="search-input">
+          <mat-label>Žanr</mat-label>
+          <mat-select [(ngModel)]="selectedGenre" (selectionChange)="doFilterChain()">
+            <mat-option value="">Svi žanrovi</mat-option>
+            <mat-option *ngFor="let genre of genreList" [value]="genre">{{ genre }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="search-input">
+          <mat-label>Reditelj</mat-label>
+          <mat-select [(ngModel)]="selectedDirector" (selectionChange)="doFilterChain()">
+            <mat-option value="">Svi reditelji</mat-option>
+            <mat-option *ngFor="let director of directorList" [value]="director">{{ director }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="search-input">
+          <mat-label>Datum</mat-label>
+          <mat-select [(ngModel)]="selectedDate" (selectionChange)="doFilterChain()">
+            <mat-option value="">Svi datumi</mat-option>
+            <mat-option *ngFor="let date of dateOptions" [value]="date">{{ date }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button color="warn" (click)="doReset()">
+        <i class="fa-solid fa-ban"></i> Resetuj
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- Tabela sa filmovima -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let movie">{{ movie.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Naziv</th>
+      <td mat-cell *matCellDef="let movie">{{ movie.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="genre">
+      <th mat-header-cell *matHeaderCellDef>Žanr</th>
+      <td mat-cell *matCellDef="let movie">{{ movie.genre }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="director">
+      <th mat-header-cell *matHeaderCellDef>Reditelj</th>
+      <td mat-cell *matCellDef="let movie">{{ movie.director }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="releaseDate">
+      <th mat-header-cell *matHeaderCellDef>Datum izlaska</th>
+      <td mat-cell *matCellDef="let movie">{{ movie.releaseDate | date }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-  
+
+  <p *ngIf="dataSource.length == 0">Nema pronađenih filmova!</p>
+</div>
+

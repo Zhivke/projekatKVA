@@ -1,1 +1,32 @@
-<p>order works!</p>
+<div *ngIf="movie">
+    <mat-card class="order-card" appearance="outlined">
+        <img mat-card-image [src]="movie.poster" [alt]="movie.title">
+        <mat-card-content>
+            <h3>Nova rezervacija - {{ movie.title }}</h3>
+            <mat-form-field class="full-width">
+                <mat-label>Film</mat-label>
+                <input type="text" matInput [value]="movie.title" disabled>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Vreme prikazivanja</mat-label>
+                <input type="text" matInput [value]="screeningTime" disabled>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Odaberite cenu</mat-label>
+                <mat-select [(ngModel)]="selectedPrice">
+                    <mat-option [value]="300">Standard - 300 RSD</mat-option>
+                    <mat-option [value]="500">VIP - 500 RSD</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="full-width">
+                <mat-label>Broj karata</mat-label>
+                <input type="number" matInput [(ngModel)]="selectedTicketCount" min="1">
+            </mat-form-field>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button (click)="doOrder()">
+                <i class="fa-solid fa-cart-shopping"></i> Rezerviši
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

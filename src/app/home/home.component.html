@@ -1,23 +1,21 @@
 <div *ngIf="error" class="container">
     <mat-card class="loading" appearance="outlined" color="red">
-        <h1>Oops, došlo je do greške!</h1>
-        <p style="color: red;">{{ error }}</p>
+        <mat-card-content>
+            <h1>Oops, došlo je do greške!</h1>
+            <p style="color: red;">{{ error }}</p>
+        </mat-card-content>
     </mat-card>
 </div>
-<div *ngIf="movie; else loading" class="container">
-    <mat-card class="movie-card" appearance="outlined" *ngFor="let movie of movie">
-        <img mat-card-image [src]="movie.poster" [alt]="movie.title">
-        <h1>{{ movie.title }}</h1>
-        <p>Originalni naziv: {{ movie.originalTitle }}</p>
-        <p>Režiser: {{ movie.director.name }}</p>
-        <p>Trajanje: {{ movie.runTime }} min</p>
-        <p>Žanrovi: 
-            <span *ngFor="let genre of movie.movieGenres">{{ genre.genre.name }} </span>
-        </p>
-        <p>Glavne uloge: 
-            <span *ngFor="let actor of movie.movieActors">{{ actor.actor.name }} </span>
-        </p>
 
+<div *ngIf="movie" class="container">
+    <mat-card class="movie-card" appearance="outlined" *ngFor="let movie of movie">
+        <img mat-card-image [src]="movie.poster" [alt]="movie.title" >
+        <mat-card-content>
+            <h1>{{ movie.title }}</h1>
+            <p>Žanr: 
+                <span *ngFor="let genre of movie.movieGenres">{{ genre.genre.name }} </span>
+            </p>
+        </mat-card-content>
         <mat-card-actions>
             <a mat-button [routerLink]="['/details/', movie.movieId]">
                 <i class="fa-solid fa-arrow-up-right-from-square"></i> Detalji
@@ -29,5 +27,4 @@
     </mat-card>
 </div>
 
-<ng-template #loading>
-
+<app-loading *ngIf="!movie && !error" />

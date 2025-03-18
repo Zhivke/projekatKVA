@@ -6,34 +6,36 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { UserModel } from '../../models/user.model';
 import { MatTableModule } from '@angular/material/table';
-import { ReservationModel } from '../../models/reservation.model';
+import { OrderModel } from '../../models/order.model';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { MovieService } from '../../services/movie.service';
+import { movieService } from '../../services/movie.service';
 
 @Component({
   selector: 'app-user',
+  standalone: true,
   imports: [
     NgIf,
-    NgFor,
     MatButtonModule,
     MatCardModule,
     MatTableModule,
-    RouterLink,
     MatExpansionModule,
     MatAccordion,
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
     MatSelectModule
-  ],
+],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
+doCancel(_t149: any) {
+throw new Error('Method not implemented.');
+}
   public displayedColumns: string[] = ['id', 'movie', 'seats', 'date', 'time', 'price', 'status', 'actions'];
   public user: UserModel | null = null;
   public userCopy: UserModel | null = null;
@@ -52,12 +54,12 @@ export class UserComponent {
     this.user = UserService.getActiveUser();
     this.userCopy = UserService.getActiveUser();
 
-    MovieService.getMovies()
+    movieService.getMovie()
       .then(rsp => this.movieList = rsp.data);
   }
 
   public doChangePassword() {
-    if (this.oldPasswordValue === '' || this.newPasswordValue === null) {
+    if (!this.oldPasswordValue || !this.newPasswordValue) {
       alert('Password cannot be empty');
       return;
     }
@@ -83,7 +85,7 @@ export class UserComponent {
   }
 
   public doUpdateUser() {
-    if (this.userCopy == null) {
+    if (!this.userCopy) {
       alert('User not defined');
       return;
     }
@@ -93,9 +95,16 @@ export class UserComponent {
     alert('Profile updated successfully');
   }
 
-  public doCancel(reservation: ReservationModel) {
-    if (UserService.cancelReservation(reservation.id)) {
+  public doChangeOrderStatus(state: 'reserved' | 'watched' | 'canceled', order: OrderModel) {
+    if (UserService.changeOrderStatus(state, order.id)) {
       this.user = UserService.getActiveUser();
     }
   }
+
+  public doRating(order: OrderModel, rating: number) {
+    if (UserService.changeRating(rating, order.id)) {
+        this.user = UserService.getActiveUser();
+    }
+}
+
 }
