@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { UserService } from '../../services/user.service';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { OrderModel } from '../../models/order.model';
 
 @Component({
   selector: 'app-order',
@@ -44,20 +45,31 @@ export class OrderComponent {
       confirmButtonText: "Da, rezerviši!"
     }).then((result: { isConfirmed: any; }) => {
       if (result.isConfirmed) {
-        const result = UserService.createOrder({
+        const newOrder: OrderModel = {
           id: new Date().getTime(),
           movie: this.movie!,
           seatCount: this.selectedTicketCount,
           pricePerTicket: this.selectedPrice,
           status: 'reserved',
-          rating: null
-        });
-        result ? this.router.navigate(['/user']) :
+          rating: null,
+          
+          // Novi podaci
+          totalPrice: this.selectedTicketCount * this.selectedPrice,
+          movieTitle: this.movie?.title,
+          date: new Date().toLocaleDateString(),  // Simulirani datum
+          time: "19:00"  // Pretpostavljena satnica, može se dinamički menjati
+        };
+  
+        const result = UserService.createOrder(newOrder);
+        if (result) {
+          this.router.navigate(['/user']);
+        } else {
           Swal.fire({
             title: "Neuspešna rezervacija",
             text: "Došlo je do greške!",
             icon: "error"
           });
+        }
       }
     });
   }

@@ -1,0 +1,89 @@
+/* details.component.css */
+
+.wrapper {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.movie-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.movie-content img {
+    width: 300px; /* Prilagodite veličinu postera po potrebi */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card {
+    flex: 1;
+    max-width: 800px; /* Šira kartica za više prostora */
+    min-height: 400px; /* Povećana visina za opis */
+    padding: 20px; /* Dodatni padding */
+}
+
+mat-card-content h2 {
+    margin-bottom: 16px;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+mat-list-item {
+    margin-bottom: 8px;
+}
+
+mat-list-item span[matListItemTitle] {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+mat-list-item span[matListItemLine] {
+    color: #ffffff;
+    word-wrap: break-word; /* Omogućava prelamanje teksta */
+    white-space: pre-wrap; /* Čuva formatiranje, ako postoji */
+}
+
+.description-container {
+    margin-top: 20px;
+}
+
+.description-container h3 {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.description-container p {
+    color: #ffffff;
+    font-size: 16px; /* Povećana veličina fonta */
+    line-height: 1.8; /* Povećan razmak između redova */
+    max-height: 200px; /* Ograničena visina za opis */
+    overflow-y: auto; /* Scroll ako je potrebno */
+    padding-right: 10px; /* Prostor za scrollbar */
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px;
+}
+
+mat-card-actions a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #3f51b5;
+}
+
+mat-card-actions a:hover {
+    color: #ffffff;
+}
+
+.fa-solid {
+    font-size: 18px;
+}

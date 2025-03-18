@@ -23,7 +23,7 @@ import { MovieModel } from '../../models/movie.model';
     MatSelectModule, 
     MatButtonModule, 
     FormsModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'

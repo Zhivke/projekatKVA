@@ -33,9 +33,7 @@ import { movieService } from '../../services/movie.service';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-doCancel(_t149: any) {
-throw new Error('Method not implemented.');
-}
+
   public displayedColumns: string[] = ['id', 'movie', 'seats', 'date', 'time', 'price', 'status', 'actions'];
   public user: UserModel | null = null;
   public userCopy: UserModel | null = null;
@@ -101,6 +99,12 @@ throw new Error('Method not implemented.');
     }
   }
 
+  public doCancel(orderId: number) {
+    if (UserService.changeOrderStatus('canceled', orderId)) {
+      // Osvježi podatke bez menjanja tipova
+      this.user = JSON.parse(JSON.stringify(UserService.getActiveUser()));
+    }
+  }
   public doRating(order: OrderModel, rating: number) {
     if (UserService.changeRating(rating, order.id)) {
         this.user = UserService.getActiveUser();

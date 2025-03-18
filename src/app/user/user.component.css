@@ -1,0 +1,64 @@
+.wrapper {
+    color: white;
+    background-color: #121212; /* Tamna pozadina */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+mat-card {
+    background-color: #1e1e1e; /* Tamnija nijansa za kartice */
+    color: white;
+}
+
+mat-card-title, mat-card-subtitle {
+    color: white;
+}
+
+.no-border {
+    margin: 5px 0;
+    color: white;
+}
+
+mat-form-field {
+    width: 100%;
+    color: white;
+}
+
+mat-form-field input {
+    color: white;
+}
+
+mat-expansion-panel {
+    background-color: #1e1e1e;
+    color: white;
+}
+
+mat-expansion-panel-header {
+    color: white;
+}
+
+table {
+    width: 100%;
+    background-color: #1e1e1e;
+    color: white;
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+td {
+    color: white;
+}
+
+button {
+    color: white;
+    background-color: #007bff;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

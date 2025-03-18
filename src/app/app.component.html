@@ -1,17 +1,14 @@
 <mat-toolbar color="primary">
-    <span><i class="fa-solid fa-film"></i> BioScope </span>
-    <span class="spacer"></span>
-    
+  <span routerLink="/" style="cursor: pointer;">
+      <i class="fa-solid fa-film"></i> BioScope
+  </span>
+  <span class="spacer"></span>
+
     <a routerLink="/home" mat-button>
       <i class="fa-solid fa-house"></i>
       <span class="link-name">Početna</span>
-    </a>
-    
-    <a routerLink="/search" mat-button>
-      <i class="fa-solid fa-search"></i>
-      <span class="link-name">Pretraga</span>
-    </a>
-    
+    </a>  
+
     <a routerLink="/login" mat-button *ngIf="!service.getActiveUser()">
       <i class="fa-solid fa-right-to-bracket"></i>
       <span class="link-name">Prijava</span>
@@ -19,7 +16,7 @@
     
     <a routerLink="/user" mat-button *ngIf="service.getActiveUser()">
       <i class="fa-solid fa-user"></i>
-      <span class="link-name">Profil</span>
+      <span class="link-name">Korpa</span>
     </a>
   
     <button mat-button *ngIf="service.getActiveUser()" (click)="doLogout()">

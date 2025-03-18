@@ -9,12 +9,19 @@
 
 <div *ngIf="movie" class="container">
     <mat-card class="movie-card" appearance="outlined" *ngFor="let movie of movie">
-        <img mat-card-image [src]="movie.poster" [alt]="movie.title" >
+        <img mat-card-image [src]="movie.poster" [alt]="movie.title">
         <mat-card-content>
             <h1>{{ movie.title }}</h1>
-            <p>Žanr: 
-                <span *ngFor="let genre of movie.movieGenres">{{ genre.genre.name }} </span>
-            </p>
+            <div class="rating-section">
+                <div class="stars">
+                    <ng-container *ngFor="let star of getStars(movieRatings[movie.movieId])">
+                        <i *ngIf="star.filled" class="fas fa-star"></i> <!-- Puna zvezda -->
+                        <i *ngIf="star.half" class="fas fa-star-half-alt"></i> <!-- Polu zvezda -->
+                        <i *ngIf="!star.filled && !star.half" class="far fa-star"></i> <!-- Prazna zvezda -->
+                    </ng-container>
+                    <span>({{ movieRatings[movie.movieId] | number: '1.1-1' }})</span>
+                </div>
+            </div>
         </mat-card-content>
         <mat-card-actions>
             <a mat-button [routerLink]="['/details/', movie.movieId]">

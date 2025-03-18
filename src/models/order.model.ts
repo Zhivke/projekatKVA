@@ -7,4 +7,10 @@ export interface OrderModel {
     pricePerTicket: number;
     status: 'reserved' | 'watched' | 'canceled';
     rating: null | number;
+    
+    // Novi atributi
+    totalPrice?: number;
+    movieTitle?: string;
+    date?: string;
+    time?: string;
 }

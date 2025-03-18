@@ -1,1 +1,56 @@
-<p>details works!</p>
+<div class="wrapper" *ngIf="movie">
+    <h1>{{ movie.title }}</h1>
+    <div class="movie-content">
+        <img [src]="movie.poster" [alt]="movie.title">
+        <mat-card class="movie-card" appearance="outlined">
+            <mat-card-content>
+                <h2>Movie Details</h2>
+                <mat-list role="list">
+                    <mat-list-item>
+                        <span matListItemTitle>Movie Actor:</span>
+                        <span matListItemLine>{{ movie.actors }}</span>
+                        <span matListItemIcon>
+                            <i class="fa-solid fa-film"></i>
+                        </span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Director:</span>
+                        <span matListItemLine>{{ movie.director }}</span>
+                        <span matListItemIcon>
+                            <i class="fa-solid fa-user-tie"></i>
+                        </span>
+                    </mat-list-item>
+                </mat-list>
+                <!-- Dodajte opis ovde -->
+                <div class="description-container">
+                    <h3>Description:</h3>
+                    <p>{{ movie.description }}</p>
+                </div>
+                <div class="reviews-section">
+                    <h2>Komentari korisnika</h2>
+                    
+                    <div class="review-card">
+                        <div class="review-header">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Marko Marković</span>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="comment">"Najbolji film godine! Specijalni efekti su fenomenalni."</p>
+                        <span class="date">15. januar 2025.</span>
+                    </div>
+                
+                    <!-- Dodajte još nekoliko hardcode komentara -->
+                </div>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
+<app-loading *ngIf="!movie" />
