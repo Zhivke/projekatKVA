@@ -1,0 +1,28 @@
+.order-card {
+    max-width: 400px; /* Ograničava širinu kartice */
+    margin: auto; /* Centriranje */
+    padding: 16px;
+}
+
+.order-card img {
+    width: 100%; /* Smanjuje sliku tako da odgovara širini kartice */
+    max-height: 250px; /* Ograničava visinu slike */
+    object-fit: cover; /* Održava proporcije i izbegava distorziju */
+    border-radius: 8px; /* Zaobljeni uglovi */
+}
+
+.full-width {
+    width: 100%; /* Osigurava da svi inputi budu iste širine */
+}
+
+mat-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Razmak između elemenata */
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: center; /* Dugme centrirano */
+    padding-top: 12px;
+}

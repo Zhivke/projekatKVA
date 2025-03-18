@@ -1,0 +1,20 @@
+.about-card {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(83, 2, 8, 0.1);
+}
+
+mat-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+mat-card-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}

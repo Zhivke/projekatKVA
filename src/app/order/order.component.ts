@@ -18,9 +18,9 @@ import Swal from 'sweetalert2';
   templateUrl: './order.component.html',
   styleUrl: './order.component.css'
 })
+
 export class OrderComponent {
   public movie:MovieModel | null = null;
-  public screeningTime: string = '';
   public selectedTicketCount: number = 1;
   public selectedPrice: number = 300;
 
@@ -29,11 +29,10 @@ export class OrderComponent {
       movieService.getMovieById(params['id'])
         .then(rsp => {
           this.movie = rsp.data;
-          this.screeningTime = rsp.data.screeningTime;
         });
     });
   }
-
+  
   public doOrder() {
     Swal.fire({
       title: `Rezervisati kartu za ${this.movie?.title}?`,
@@ -48,7 +47,6 @@ export class OrderComponent {
         const result = UserService.createOrder({
           id: new Date().getTime(),
           movie: this.movie!,
-          screeningTime: this.screeningTime,
           seatCount: this.selectedTicketCount,
           pricePerTicket: this.selectedPrice,
           status: 'reserved',
