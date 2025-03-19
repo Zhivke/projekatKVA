@@ -1,14 +1,101 @@
-.search-input {
-    width: 400px;
+/* search.component.css */
+.wrapper {
+    padding: 20px;
+    background-color: #4b0a0a; /* Tamna pozadina */
+    color: rgb(255, 255, 255); /* Beli tekst */
+    min-height: 100vh;
+}
+
+.search-card {
+    background-color: #631515; /* Srednje tamna pozadina za karticu */
+    margin-bottom: 20px;
+    border: 1px solid #631f1f; /* Siva granica */
 }
 
 .search-input-row {
     display: flex;
+    gap: 16px;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
-.search-card {
-    margin-bottom: 30px;
+.search-input {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Stilovi za Angular Material komponente */
+::ng-deep .mat-form-field-label {
+    color: #ffffff !important; /* Beli tekst za labele */
+}
+
+::ng-deep .mat-select-value {
+    color: white !important; /* Beli tekst u select poljima */
+}
+
+::ng-deep .mat-form-field-underline {
+    background-color: #666 !important; /* Siva linija ispod inputa */
+}
+
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: rgba(248, 248, 248, 0.1); /* Prozirno bela pozadina inputa */
+}
+
+/* Tabela */
+table {
     width: 100%;
+    border-collapse: collapse;
+}
+
+::ng-deep .mat-header-cell {
+    color: white !important; /* Beli tekst u headeru tabele */
+    background-color: #ffffff !important; /* Tamnija pozadina za header */
+}
+
+::ng-deep .mat-cell {
+    color: white !important; /* Beli tekst u ćelijama */
+    border-bottom: 1px solid #e0d7d7; /* Siva granica između redova */
+}
+
+.mat-row:hover {
+    background-color: rgba(247, 247, 247, 0.05); /* Svjetliji hover efekat */
+}
+
+/* Dugmad */
+button.mat-button {
+    color: white !important;
+    border: 1px solid #666;
+    margin: 5px;
+}
+
+button.mat-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Placeholder tekst */
+::ng-deep .mat-input-element::placeholder {
+    color: #999 !important;
+}
+
+/* Ikone */
+.fa-solid {
+    color: white;
+    margin-right: 8px;
+}
+
+/* Poruka za praznu tabelu */
+p {
+    text-align: center;
+    padding: 20px;
+    color: #ccc;
+}
+
+::ng-deep .mat-table {
+    color: white !important;
+}
+td {
+    color: white !important;
+}
+
+tr {
+    color: white !important;
 }

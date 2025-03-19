@@ -4,31 +4,67 @@
         <img [src]="movie.poster" [alt]="movie.title">
         <mat-card class="movie-card" appearance="outlined">
             <mat-card-content>
-                <h2>Movie Details</h2>
+                <h2>Detalji filma</h2>
                 <mat-list role="list">
                     <mat-list-item>
-                        <span matListItemTitle>Movie Actor:</span>
-                        <span matListItemLine>{{ movie.actors }}</span>
+                        <span matListItemTitle>Žanr:</span>
+                        <span matListItemLine>{{ movie.genre }}</span>
                         <span matListItemIcon>
-                            <i class="fa-solid fa-film"></i>
+                            <i class="fa-solid fa-tag"></i>
                         </span>
                     </mat-list-item>
                     <mat-list-item>
-                        <span matListItemTitle>Director:</span>
+                        <span matListItemTitle>Režiser:</span>
                         <span matListItemLine>{{ movie.director }}</span>
                         <span matListItemIcon>
                             <i class="fa-solid fa-user-tie"></i>
                         </span>
                     </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Glumci:</span>
+                        <span matListItemLine>{{ movie.actors.join(', ') }}</span>
+                        <span matListItemIcon>
+                            <i class="fa-solid fa-users"></i>
+                        </span>
+                    </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Trajanje:</span>
+                        <span matListItemLine>{{ formatDuration(movie.duration)}}</span>
+                        <span matListItemIcon>
+                            <i class="fa-solid fa-clock"></i>
+                        </span> 
+                    </mat-list-item>
+                    <mat-list-item>
+                        <span matListItemTitle>Datum izlaska:</span>
+                        <span matListItemLine>{{ movie.releaseDate }}</span>
+                        <span matListItemIcon>
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </span>
+                    </mat-list-item>
                 </mat-list>
-                <!-- Dodajte opis ovde -->
+
                 <div class="description-container">
-                    <h3>Description:</h3>
+                    <h3>Opis:</h3>
                     <p>{{ movie.description }}</p>
                 </div>
+
+                <div class="projections-section">
+                    <h2>Projekcije</h2>
+                    <mat-list>
+                        <mat-list-item *ngFor="let projection of movie.projectionDates">
+                            <span matListItemTitle>{{ projection }}</span>
+                            <span matListItemLine>Cena karte: {{ movie.price }} RSD</span>
+                            <span matListItemIcon>
+                                <i class="fa-solid fa-ticket"></i>
+                            </span>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
+
                 <div class="reviews-section">
-                    <h2>Komentari korisnika</h2>
+                    <h2>Recenzije gledalaca</h2>
                     
+                    <!-- Hardcode komentari -->
                     <div class="review-card">
                         <div class="review-header">
                             <i class="fa-solid fa-user"></i>
@@ -44,8 +80,22 @@
                         <p class="comment">"Najbolji film godine! Specijalni efekti su fenomenalni."</p>
                         <span class="date">15. januar 2025.</span>
                     </div>
-                
-                    <!-- Dodajte još nekoliko hardcode komentara -->
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <i class="fa-solid fa-user"></i>
+                            <span>Ana Anić</span>
+                            <div class="stars">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="comment">"Oduševljeni smo glumom i pričom!"</p>
+                        <span class="date">16. januar 2025.</span>
+                    </div>
                 </div>
 
             </mat-card-content>

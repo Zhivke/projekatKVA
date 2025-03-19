@@ -25,4 +25,5 @@ export class movieService{
     static async getMovieById(id: number) {
         return client.get(`/movie/${id}`)
     }
+
 }

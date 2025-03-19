@@ -6,8 +6,9 @@ import { UserComponent } from './user/user.component';
 import { SignupComponent } from './signup/signup.component';
 import { DetailsComponent } from './details/details.component';
 import { OrderComponent } from './order/order.component';
-import { MovieSearchComponent } from './search/search.component';
+import { SearchComponent } from './search/search.component';
 import { LoadingComponent } from './loading/loading.component';
+import { CartComponent } from './cart/cart.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -17,7 +18,8 @@ export const routes: Routes = [
     {path: 'signup', component:SignupComponent},
     {path: 'details/:id/order', component:OrderComponent},
     {path: 'details/:id', component:DetailsComponent},
-    {path:'search', component:MovieSearchComponent},
+    {path:'search', component:SearchComponent},
     {path:'loading', component:LoadingComponent},
-    { path: '**', redirectTo: ''},
+    {path:'cart',component:CartComponent},
+    { path: '**', redirectTo: ''}
 ];

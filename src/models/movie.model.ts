@@ -8,6 +8,16 @@ export interface MovieModel {
   poster: string;
   description: string;
   shortDescription: string;
-  duration: number; // Vreme trajanja filma
-  actors: string[]; // Lista glumaca
+  duration: number;          // Mapiramo sa API runTime
+  actors: string[];
+  price: number;             // Simuliramo
+  projectionDates: string[]; // Generišemo
+  reviews?: ReviewModel[];   // Hardcode
+}
+
+export interface ReviewModel {
+  user: string;
+  rating: number;
+  comment: string;
+  date?: string;
 }

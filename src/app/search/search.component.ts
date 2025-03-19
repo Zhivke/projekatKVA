@@ -1,93 +1,88 @@
+// search.component.ts
 import { Component } from '@angular/core';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { NgFor, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { LoadingComponent } from "../loading/loading.component";
+import { RouterLink } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
-import { MovieModel } from '../../models/movie.model';
-import { movieService } from '../../services/movie.service'; // Pazimo na ispravan import
+import { movieService } from '../../services/movie.service';
 
 @Component({
-  selector: 'app-movie-search',
+  selector: 'app-search',
   standalone: true,
   imports: [
-    CommonModule,  
-    FormsModule,   
-    NgFor, 
     MatTableModule,
+    NgIf,
+    NgFor,
     MatButtonModule,
+    LoadingComponent,
+    RouterLink,
     MatInputModule,
     MatFormFieldModule,
+    FormsModule,
     MatCardModule,
     MatSelectModule
   ],
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'] // OVO JE BILO GREŠKA, treba da bude 'styleUrls'
+  styleUrls: ['./search.component.css']
 })
-export class MovieSearchComponent {
-  displayedColumns: string[] = ['id', 'title', 'genre', 'director', 'releaseDate', 'actions'];
-  allData: MovieModel[] | null = null;
-  genreList: string[] = [];
-  selectedGenre: string | null = null;
-  dataSource: MovieModel[] | null = null;
-  directorList: string[] = [];
-  selectedDirector: string | null = null;
+export class SearchComponent {
+  displayedColumns: string[] = ['id', 'title', 'genre', 'duration', 'actions'];
+  allData: any[] | null = null;
+  dataSource: any[] | null = null;
+  
+  // Filteri
   userInput: string = '';
-  dateOptions: string[] = [];
-  selectedDate: string | null = null;
+  selectedGenre: string | null = null;
+  
+  // Liste za select
+  genreList: string[] = [];
 
   constructor() {
-    movieService.getMovie() // SADA ISPRAVNO POZIVAMO STATIC METODU
-      .then((rsp: { data: MovieModel[] }) => {
-        this.allData = rsp.data;
-        this.dataSource = rsp.data;
+    movieService.getMovie()
+      .then(rsp => {
+        this.allData = this.formatMovies(rsp.data);
+        this.dataSource = this.formatMovies(rsp.data);
         this.generateSearchCriteria(rsp.data);
       })
-      .catch((error: any) => console.error('Error fetching movies:', error));
   }
 
-  public generateSearchCriteria(source: MovieModel[]) {
-    this.genreList = [...new Set(source.map(obj => obj.genre))];
-    this.directorList = [...new Set(source.map(obj => obj.director))];
-    this.dateOptions = [...new Set(source.map(obj => obj.releaseDate.split('T')[0]))];
+  private formatMovies(movies: any[]): any[] {
+    return movies.map(movie => ({
+      ...movie,
+      genresFormatted: movie.movieGenres.map((g: any) => g.genre.name).join(', ')
+    }));
   }
 
-  public doReset() {
+  generateSearchCriteria(movies: any[]) {
+    this.genreList = [...new Set(movies.flatMap(m => 
+      m.movieGenres.map((g: any) => g.genre.name)
+    ))];
+  }
+
+  doReset() {
     this.userInput = '';
     this.selectedGenre = null;
-    this.selectedDirector = null;
-    this.selectedDate = null;
     this.dataSource = this.allData;
-    if (this.allData) {
-      this.generateSearchCriteria(this.allData);
-    }
   }
 
-  public doFilterChain() {
+  doFilterChain() {
     if (!this.allData) return;
 
-    this.dataSource = this.allData
-      .filter(obj => {
-        if (!this.userInput) return true;
-        return obj.title.toLowerCase().includes(this.userInput.toLowerCase()) ||
-               obj.id.toString().includes(this.userInput);
-      })
-      .filter(obj => !this.selectedGenre || obj.genre === this.selectedGenre)
-      .filter(obj => !this.selectedDirector || obj.director === this.selectedDirector)
-      .filter(obj => {
-        if (!this.selectedDate) return true;
-        const releaseDate = new Date(obj.releaseDate);
-        const selectedDate = new Date(this.selectedDate);
-        return releaseDate.toDateString() === selectedDate.toDateString();
-      });
+    this.dataSource = this.allData.filter(movie => {
+      const textMatch = this.userInput === '' || 
+        movie.title.toLowerCase().includes(this.userInput.toLowerCase()) ||
+        movie.movieId.toString().includes(this.userInput);
 
-    this.generateSearchCriteria(this.dataSource);
-  }
-  
-  public viewDetails(movie: MovieModel) {
-    console.log('Viewing details for:', movie);
+      const genreMatch = !this.selectedGenre || 
+        movie.movieGenres.some((g: any) => g.genre.name === this.selectedGenre);
+
+      return textMatch && genreMatch;
+    });
   }
 }
